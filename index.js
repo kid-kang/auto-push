@@ -5,14 +5,6 @@ const FILE_PATH = `${__dirname}/README.md`
 const moment = require('moment')
 const newDate = () => moment().format('YYYY-MM-DD HH:mm:ss')
 
-
-schedule.scheduleJob('30 * * * * *', async () => {
-  await editFile()
-  await implementShell('git add .', console.log)
-  await implementShell('git commit -m "feat: 测试产品"', console.log)
-  await implementShell('git push -u origin main', console.log)
-})
-
 const implementShell = async (shell, callback) => {
   callback(`[${newDate()}] ${shell}`)
   return new Promise((resolve, reject) => {
@@ -44,11 +36,26 @@ const editFile = () => {
         reject(err)
         throw err
       }
-      const temp = `${data}
-- ${newDate()}
-`
+      const temp = `${data} - ${newDate()}`
       fs.writeFile(FILE_PATH, temp, null, err => err ? reject(err) : resolve())
     })
   })
 }
+
+const setTimePush = (t) => {
+  schedule.scheduleJob(t, async () => {
+    await editFile()
+    await implementShell('git add .', console.log)
+    await implementShell('git commit -m "feat: 测试产品"', console.log)
+    await implementShell('git push -u origin main', console.log)
+  })
+}
+
+setTimePush('30 1 * * * *')
+setTimePush('30 10 * * * *')
+setTimePush('30 20 * * * *')
+setTimePush('30 30 * * * *')
+setTimePush('30 40 * * * *')
+setTimePush('30 50 * * * *')
+
 
