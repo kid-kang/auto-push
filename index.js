@@ -51,11 +51,12 @@ const setTimePush = (t) => {
   })
 }
 
-setTimePush('30 1 * * * *')
-setTimePush('30 10 * * * *')
-setTimePush('30 20 * * * *')
-setTimePush('30 30 * * * *')
-setTimePush('30 40 * * * *')
-setTimePush('30 50 * * * *')
+setTimePush('30 * * * * *')
+// setTimePush('30 1 * * * *')
+// setTimePush('30 10 * * * *')
+// setTimePush('30 20 * * * *')
+// setTimePush('30 30 * * * *')
+// setTimePush('30 40 * * * *')
+// setTimePush('30 50 * * * *')
 
 
